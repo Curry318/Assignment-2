@@ -18,11 +18,14 @@ import org.apache.commons.httpclient.methods.*;
 import javax.imageio.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.event.ChangeListener;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import java.beans.*;
 import java.text.*;
+import java.util.Hashtable;
 import java.util.concurrent.*;
 
 /** @author nazmul idris */
@@ -86,8 +89,8 @@ private void _setupTask() {
       String uri = MapLookup.getMap(Double.parseDouble(ttfLat.getText()),
                                     Double.parseDouble(ttfLon.getText()),
                                     Integer.parseInt(ttfSizeW.getText()),
-                                    Integer.parseInt(ttfSizeH.getText()),
-                                    Integer.parseInt(ttfZoom.getText())
+                                    Integer.parseInt(ttfSizeH.getText())
+                                 //   Integer.parseInt(ttfZoom.getText())
       );
       sout("Google Maps URI=" + uri);
 
@@ -303,7 +306,8 @@ private void initComponents() {
   label1 = new JLabel();
   ttfLicense = new JTextField();
   label6 = new JLabel();
-  ttfZoom = new JTextField();
+ // ttfZoom = new JTextField();
+ 
   scrollPane1 = new JScrollPane();
   ttaStatus = new JTextArea();
   panel2 = new JPanel();
@@ -343,8 +347,8 @@ private void initComponents() {
   				new TitledBorder("Configure the inputs to Google Static Maps"),
   				Borders.DLU2_BORDER));
   			panel1.setLayout(new TableLayout(new double[][] {
-  				{0.17, 0.17, 0.17, 0.17, 0.05, TableLayout.FILL},
-  				{TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED}}));
+  				{0.12, 0.10, 0.12, 0.40, 0.05,TableLayout.FILL},
+  				{TableLayout.PREFERRED, TableLayout.PREFERRED,TableLayout.PREFERRED}}));
   			((TableLayout)panel1.getLayout()).setHGap(5);
   			((TableLayout)panel1.getLayout()).setVGap(5);
 
@@ -422,8 +426,23 @@ private void initComponents() {
   			panel1.add(label6, new TableLayoutConstraints(2, 2, 2, 2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 
   			//---- ttfZoom ----
-  			ttfZoom.setText("14");
-  			panel1.add(ttfZoom, new TableLayoutConstraints(3, 2, 3, 2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
+  			//ttfZoom.setText("14");
+  			JSlider SZoom = new JSlider(JSlider.HORIZONTAL,0,19,10);
+  			SZoom.addChangeListener(null);
+  			
+  			SZoom.setMajorTickSpacing(2);
+  		//	SZoom.setMinorTickSpacing(1);
+  			SZoom.setPaintTicks(true);
+  			
+  			Hashtable labelTable = new Hashtable();
+  			labelTable.put(new Integer(0),new Label("0"));
+  			labelTable.put(new Integer(19),new Label("19"));
+  			SZoom.setLabelTable(labelTable);
+  			SZoom.setPaintLabels(true);
+  			
+  			panel1.add(SZoom, new TableLayoutConstraints(3, 2, 3, 2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
+  			
+  		
   		}
   		contentPanel.add(panel1, new TableLayoutConstraints(0, 0, 0, 0, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 
@@ -517,7 +536,8 @@ private JButton btnQuit;
 private JLabel label1;
 private JTextField ttfLicense;
 private JLabel label6;
-private JTextField ttfZoom;
+//private JTextField ttfZoom;
+
 private JScrollPane scrollPane1;
 private JTextArea ttaStatus;
 private JPanel panel2;
