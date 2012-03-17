@@ -18,6 +18,7 @@ import org.apache.commons.httpclient.methods.*;
 import javax.imageio.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import java.awt.*;
@@ -439,6 +440,14 @@ private void initComponents() {
   			labelTable.put(new Integer(19),new Label("19"));
   			SZoom.setLabelTable(labelTable);  */
   			SZoom.setPaintLabels(true);
+  			
+  			public void stateChanged(ChangeEvent e){
+  				JSlider bar = (JSlider)e.getSource();
+  				if(!bar.getValueIsAdjusting()){
+  					int i = (int) bar.getValue();
+  					}
+  				}
+  			
   			
   			panel1.add(SZoom, new TableLayoutConstraints(3, 2, 3, 2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
   			
