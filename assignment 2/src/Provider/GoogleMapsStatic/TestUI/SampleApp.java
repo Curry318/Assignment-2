@@ -431,13 +431,13 @@ private void initComponents() {
   			SZoom.addChangeListener(null);
   			
   			SZoom.setMajorTickSpacing(2);
-  		//	SZoom.setMinorTickSpacing(1);
+  			SZoom.setMinorTickSpacing(1);
   			SZoom.setPaintTicks(true);
   			
-  			Hashtable labelTable = new Hashtable();
+  		/*	Hashtable labelTable = new Hashtable();
   			labelTable.put(new Integer(0),new Label("0"));
   			labelTable.put(new Integer(19),new Label("19"));
-  			SZoom.setLabelTable(labelTable);
+  			SZoom.setLabelTable(labelTable);  */
   			SZoom.setPaintLabels(true);
   			
   			panel1.add(SZoom, new TableLayoutConstraints(3, 2, 3, 2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
