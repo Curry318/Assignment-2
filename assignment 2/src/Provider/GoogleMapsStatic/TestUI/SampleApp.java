@@ -12,6 +12,7 @@ import Task.Support.CoreSupport.*;
 import Task.Support.GUISupport.*;
 import com.jgoodies.forms.factories.*;
 import info.clearthought.layout.*;
+
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.methods.*;
 
@@ -90,8 +91,8 @@ private void _setupTask() {
       String uri = MapLookup.getMap(Double.parseDouble(ttfLat.getText()),
                                     Double.parseDouble(ttfLon.getText()),
                                     Integer.parseInt(ttfSizeW.getText()),
-                                    Integer.parseInt(ttfSizeH.getText())
-                                 //   Integer.parseInt(ttfZoom.getText())
+                                    Integer.parseInt(ttfSizeH.getText()),
+                                    Integer.parseInt(Integer.toString(SZoom.value))
       );
       sout("Google Maps URI=" + uri);
 
@@ -307,8 +308,8 @@ private void initComponents() {
   label1 = new JLabel();
   ttfLicense = new JTextField();
   label6 = new JLabel();
- // ttfZoom = new JTextField();
- 
+  ttfZoom = new JTextField();
+  // TODO
   scrollPane1 = new JScrollPane();
   ttaStatus = new JTextArea();
   panel2 = new JPanel();
@@ -318,6 +319,7 @@ private void initComponents() {
   ttfProgressMsg = new JTextField();
   progressBar = new JProgressBar();
   lblProgressStatus = new JLabel();
+  SZoom = new ZoomSlider();
 
   //======== this ========
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -348,7 +350,7 @@ private void initComponents() {
   				new TitledBorder("Configure the inputs to Google Static Maps"),
   				Borders.DLU2_BORDER));
   			panel1.setLayout(new TableLayout(new double[][] {
-  				{0.12, 0.10, 0.12, 0.40, 0.05,TableLayout.FILL},
+  				{0.12, 0.10, 0.12, 0.42, 0.05,TableLayout.FILL},
   				{TableLayout.PREFERRED, TableLayout.PREFERRED,TableLayout.PREFERRED}}));
   			((TableLayout)panel1.getLayout()).setHGap(5);
   			((TableLayout)panel1.getLayout()).setVGap(5);
@@ -425,9 +427,11 @@ private void initComponents() {
   			label6.setText("Zoom");
   			label6.setHorizontalAlignment(SwingConstants.RIGHT);
   			panel1.add(label6, new TableLayoutConstraints(2, 2, 2, 2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
-
+  			// TODO
   			//---- ttfZoom ----
-  			//ttfZoom.setText("14");
+  /*	    ttfZoom.setText(str);
+  			ttfZoom.setPreferredSize(new Dimension(30,40));
+  			
   			JSlider SZoom = new JSlider(JSlider.HORIZONTAL,0,19,10);
   			SZoom.addChangeListener(null);
   			
@@ -435,21 +439,25 @@ private void initComponents() {
   			SZoom.setMinorTickSpacing(1);
   			SZoom.setPaintTicks(true);
   			
-  		/*	Hashtable labelTable = new Hashtable();
+  			Hashtable labelTable = new Hashtable();
   			labelTable.put(new Integer(0),new Label("0"));
   			labelTable.put(new Integer(19),new Label("19"));
-  			SZoom.setLabelTable(labelTable);  */
+  			SZoom.setLabelTable(labelTable);  
   			SZoom.setPaintLabels(true);
   			
-  			public void stateChanged(ChangeEvent e){
+  			SZoom.stateChanged(ChangeEvent e){
   				JSlider bar = (JSlider)e.getSource();
   				if(!bar.getValueIsAdjusting()){
   					int i = (int) bar.getValue();
   					}
-  				}
+  				}*/
+  		  ttfZoom.setPreferredSize(new Dimension(30,40));
+  			JPanel Pzoom = new JPanel();
+  			Pzoom.add(ttfZoom); 
+  			Pzoom.add(SZoom);
   			
-  			
-  			panel1.add(SZoom, new TableLayoutConstraints(3, 2, 3, 2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
+  	//	panel1.add(ttfZoom, new TableLayoutConstraints(3,2,3,2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));	
+  		panel1.add(Pzoom, new TableLayoutConstraints(3, 2, 3, 2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
   			
   		
   		}
@@ -545,8 +553,9 @@ private JButton btnQuit;
 private JLabel label1;
 private JTextField ttfLicense;
 private JLabel label6;
-//private JTextField ttfZoom;
-
+public  JTextField ttfZoom;
+// TODO
+private ZoomSlider SZoom; 
 private JScrollPane scrollPane1;
 private JTextArea ttaStatus;
 private JPanel panel2;
