@@ -88,8 +88,8 @@ private void _setupTask() {
       // set the license key
       MapLookup.setLicenseKey(ttfLicense.getText());
       // get the uri for the static map
-      String uri = MapLookup.getMap(Double.parseDouble(ttfLat.getText()),
-                                    Double.parseDouble(ttfLon.getText()),
+      String uri = MapLookup.getMap(Double.parseDouble(ttfLat.getValue().toString()),
+                                    Double.parseDouble(ttfLon.getValue().toString()),
                                     Integer.parseInt(ttfSizeW.getText()),
                                     Integer.parseInt(ttfSizeH.getText()),
                                     Integer.parseInt(Integer.toString(SZoom.value))
@@ -298,12 +298,12 @@ private void initComponents() {
   label2 = new JLabel();
   ttfSizeW = new JTextField();
   label4 = new JLabel();
-  ttfLat = new JTextField();
+ // ttfLat = new JTextField();
   btnGetMap = new JButton();
   label3 = new JLabel();
   ttfSizeH = new JTextField();
   label5 = new JLabel();
-  ttfLon = new JTextField();
+//  ttfLon = new JTextField();
   btnQuit = new JButton();
   label1 = new JLabel();
   ttfLicense = new JTextField();
@@ -319,7 +319,11 @@ private void initComponents() {
   ttfProgressMsg = new JTextField();
   progressBar = new JProgressBar();
   lblProgressStatus = new JLabel();
+  
+  //Curry
   SZoom = new ZoomSlider();
+  ttfLat = new JSpinner();
+  ttfLon = new JSpinner();
 
   //======== this ========
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -366,11 +370,14 @@ private void initComponents() {
 
   			//---- label4 ----
   			label4.setText("Latitude");
+  			SpinnerModel Lat = new SpinnerNumberModel(38.931099,-90.0000,90.0000,0.001);
   			label4.setHorizontalAlignment(SwingConstants.RIGHT);
   			panel1.add(label4, new TableLayoutConstraints(2, 0, 2, 0, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 
   			//---- ttfLat ----
-  			ttfLat.setText("38.931099");
+  			ttfLat = new JSpinner(Lat);
+  	//		ttfLat.setText(ttfLat.getValue().toString());
+  			
   			panel1.add(ttfLat, new TableLayoutConstraints(3, 0, 3, 0, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 
   			//---- btnGetMap ----
@@ -395,11 +402,13 @@ private void initComponents() {
 
   			//---- label5 ----
   			label5.setText("Longitude");
+  			SpinnerModel Lon = new SpinnerNumberModel(-77.3489,-180,180,0.001);
   			label5.setHorizontalAlignment(SwingConstants.RIGHT);
   			panel1.add(label5, new TableLayoutConstraints(2, 1, 2, 1, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 
   			//---- ttfLon ----
-  			ttfLon.setText("-77.3489");
+  			ttfLon = new JSpinner(Lon);
+  	//		ttfLon.setText("-77.3489");
   			panel1.add(ttfLon, new TableLayoutConstraints(3, 1, 3, 1, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 
   			//---- btnQuit ----
@@ -543,19 +552,19 @@ private JPanel panel1;
 private JLabel label2;
 private JTextField ttfSizeW;
 private JLabel label4;
-private JTextField ttfLat;
+//private JTextField ttfLat;
 private JButton btnGetMap;
 private JLabel label3;
 private JTextField ttfSizeH;
 private JLabel label5;
-private JTextField ttfLon;
+//private JTextField ttfLon;
 private JButton btnQuit;
 private JLabel label1;
 private JTextField ttfLicense;
 private JLabel label6;
 public  JTextField ttfZoom;
 // TODO
-private ZoomSlider SZoom; 
+
 private JScrollPane scrollPane1;
 private JTextArea ttaStatus;
 private JPanel panel2;
@@ -565,5 +574,9 @@ private JCheckBox checkboxSendStatus;
 private JTextField ttfProgressMsg;
 private JProgressBar progressBar;
 private JLabel lblProgressStatus;
+// Curry
+private ZoomSlider SZoom;
+private JSpinner ttfLat;
+private JSpinner ttfLon;
 // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
