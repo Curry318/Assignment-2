@@ -26,6 +26,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import java.beans.*;
+import java.io.File;
+import java.io.IOException;
 import java.text.*;
 import java.util.Hashtable;
 import java.util.concurrent.*;
@@ -224,6 +226,48 @@ private void _displayImgInFrame() {
 
   GUIUtils.centerOnScreen(frame);
   frame.setVisible(true);
+//TODO 
+//*********************************BookMark 
+  final JButton book = new JButton("BookMark");
+  JPanel mapPanel = new JPanel();
+  mapPanel.setLayout(new FlowLayout(FlowLayout.LEADING,10,10));
+  mapPanel.add(book); 
+  
+  Container bm = frame.getContentPane();
+  bm.add(mapPanel);
+  book.addActionListener(new ActionListener(){
+	  public void actionPerformed(ActionEvent e){
+		  if (e.getSource() == book){
+			  RenderedImage Img = myCreateImage();
+			  int result = file.showSaveDialog(file);
+			  if (result == JFileChooser.APPROVE_OPTION){
+				  File save = file.getSelectedFile();
+				  
+				  try {
+					  ImageIO.write(Img, "jpg", new File(save +".jpg"));
+
+					  } catch (IOException ex) {
+					  System.out.println("Exception ");
+					  }
+					  }
+					  else {
+					  System.out.println("Nothing");
+					  }
+			  }
+		  }
+	  });
+  
+  mapPanel.add(imgLbl);
+  mapPanel.repaint(); 
+  }
+
+public RenderedImage myCreateImage(){
+	int W = _img.getWidth();
+	int H = _img.getHeight();
+	
+	BufferedImage image = new BufferedImage(W,H,BufferedImage.TYPE_INT_BGR);
+	image = _img;
+	return image;
 }
 
 private void _displayRespStrInFrame() {
@@ -309,7 +353,6 @@ private void initComponents() {
   ttfLicense = new JTextField();
   label6 = new JLabel();
   ttfZoom = new JTextField();
-  // TODO
   scrollPane1 = new JScrollPane();
   ttaStatus = new JTextArea();
   panel2 = new JPanel();
@@ -319,11 +362,13 @@ private void initComponents() {
   ttfProgressMsg = new JTextField();
   progressBar = new JProgressBar();
   lblProgressStatus = new JLabel();
-  
-  //Curry
-  SZoom = new ZoomSlider();
-  ttfLat = new JSpinner();
-  ttfLon = new JSpinner();
+  // TODO 
+  //***************************Curry
+ Pzoom = new ZoomSlider();
+ SZoom = new ZoomSlider();
+ ttfLat = new JSpinner();
+ ttfLon = new JSpinner();
+ file = new JFileChooser();
 
   //======== this ========
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -459,14 +504,15 @@ private void initComponents() {
   				if(!bar.getValueIsAdjusting()){
   					int i = (int) bar.getValue();
   					}
-  				}*/
+  				}
   		  ttfZoom.setPreferredSize(new Dimension(30,40));
-  			JPanel Pzoom = new JPanel();
+  		  ttfZoom.setText(Integer.toString(SZoom.value));
+  		   JPanel Pzoom = new JPanel();
   			Pzoom.add(ttfZoom); 
-  			Pzoom.add(SZoom);
+  			Pzoom.add(SZoom);*/
   			
-  	//	panel1.add(ttfZoom, new TableLayoutConstraints(3,2,3,2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));	
-  		panel1.add(Pzoom, new TableLayoutConstraints(3, 2, 3, 2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
+  		panel1.add(Pzoom, new TableLayoutConstraints(3,2,3,2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));	
+  	//	panel1.add(SZoom, new TableLayoutConstraints(3, 2, 3, 2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
   			
   		
   		}
@@ -563,8 +609,6 @@ private JLabel label1;
 private JTextField ttfLicense;
 private JLabel label6;
 public  JTextField ttfZoom;
-// TODO
-
 private JScrollPane scrollPane1;
 private JTextArea ttaStatus;
 private JPanel panel2;
@@ -574,9 +618,13 @@ private JCheckBox checkboxSendStatus;
 private JTextField ttfProgressMsg;
 private JProgressBar progressBar;
 private JLabel lblProgressStatus;
-// Curry
+//TODO
+//********************************** Curry
 private ZoomSlider SZoom;
+private ZoomSlider Pzoom;
 private JSpinner ttfLat;
 private JSpinner ttfLon;
+private JFileChooser file;
+
 // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

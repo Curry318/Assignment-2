@@ -1,5 +1,7 @@
 package Provider.GoogleMapsStatic;
 
+import info.clearthought.layout.TableLayout;
+
 import java.awt.*;
 import java.awt.event.*;
 //import java.awt.event.WindowListener;
@@ -12,7 +14,10 @@ public class ZoomSlider extends JPanel implements WindowListener,
 													ChangeListener {
 	
 	    public int value = 0;
-	    private JTextField ttfZoom = new JTextField();
+	    private JTextField ttfZoom = new JTextField(10);
+	    
+	    JPanel Pzoom = new JPanel();
+		
 	
 		static final int FPS_MIN = 1;
 		static final int FPS_MAX = 19;
@@ -22,18 +27,22 @@ public class ZoomSlider extends JPanel implements WindowListener,
 	  
 		public ZoomSlider()
 		{
-	    	JSlider SZoom = new JSlider(JSlider.HORIZONTAL,1,19,10);
-			SZoom.addChangeListener(null);
 			
-			SZoom.setMajorTickSpacing(2);
+	    	JSlider SZoom = new JSlider(JSlider.HORIZONTAL,1,19,10);
+			SZoom.addChangeListener(this);
+			
+			SZoom.setMajorTickSpacing(3);
 			SZoom.setMinorTickSpacing(1);
 			SZoom.setPaintTicks(true);
 			
 			SZoom.addChangeListener(this);	
 			SZoom.setPaintLabels(true);
 			
-			add(SZoom);
-		
+			
+		//	ttfZoom.setPreferredSize(new Dimension(1,10));
+			add(ttfZoom,BorderLayout.WEST); 
+			add(SZoom,BorderLayout.EAST);
+			
 	}
 		
     
@@ -45,7 +54,10 @@ public class ZoomSlider extends JPanel implements WindowListener,
 	        String str = Integer.toString (value);
 	        ttfZoom.setText(str);
 		}
+		
    }
+	
+	
 	public void actionPerformed(ActionEvent e){
 		
 	}
