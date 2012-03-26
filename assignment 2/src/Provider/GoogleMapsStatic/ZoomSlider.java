@@ -1,6 +1,6 @@
 package Provider.GoogleMapsStatic;
 
-import info.clearthought.layout.TableLayout;
+
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,7 +14,7 @@ public class ZoomSlider extends JPanel implements WindowListener,
 													ChangeListener {
 	
 	    public int value = 0;
-	    private JTextField ttfZoom = new JTextField(10);
+	    private JTextField ttfZoom = new JTextField("10");
 	    
 	    JPanel Pzoom = new JPanel();
 		

@@ -483,8 +483,8 @@ private void initComponents() {
   			panel1.add(label6, new TableLayoutConstraints(2, 2, 2, 2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
   			// TODO
   			//---- ttfZoom ----
-  /*	    ttfZoom.setText(str);
-  			ttfZoom.setPreferredSize(new Dimension(30,40));
+ /*	        ttfZoom.setText("10");
+ 		   ttfZoom.setPreferredSize(new Dimension(30,40));
   			
   			JSlider SZoom = new JSlider(JSlider.HORIZONTAL,0,19,10);
   			SZoom.addChangeListener(null);
