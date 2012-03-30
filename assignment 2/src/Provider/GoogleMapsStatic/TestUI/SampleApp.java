@@ -242,7 +242,7 @@ private void _displayImgInFrame() {
 			  int result = file.showSaveDialog(file);
 			  if (result == JFileChooser.APPROVE_OPTION){
 				  File save = file.getSelectedFile();
-				  
+
 				  try {
 					  ImageIO.write(Img, "jpg", new File(save +".jpg"));
 
@@ -264,7 +264,7 @@ private void _displayImgInFrame() {
 public RenderedImage myCreateImage(){
 	int W = _img.getWidth();
 	int H = _img.getHeight();
-	
+
 	BufferedImage image = new BufferedImage(W,H,BufferedImage.TYPE_INT_BGR);
 	image = _img;
 	return image;

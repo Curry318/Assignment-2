@@ -14,7 +14,7 @@ public class ZoomSlider extends JPanel implements WindowListener,
 													ChangeListener {
 	
 	    public int value = 0;
-	    private JTextField ttfZoom = new JTextField("10");
+	    public JTextField ttfZoom = new JTextField("10");
 	    
 	    JPanel Pzoom = new JPanel();
 		
@@ -23,8 +23,6 @@ public class ZoomSlider extends JPanel implements WindowListener,
 		static final int FPS_MAX = 19;
 		static final int FPS_INIT = 10;
 		
-	   
-	  
 		public ZoomSlider()
 		{
 			
